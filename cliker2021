@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h>
+#include <cstdlib> // для функции exit()
 
 using namespace std;
 int main()
@@ -30,14 +31,20 @@ GetCursorPos(&CurPos);
 int x = (int)CurPos.x;
 int y = (int)CurPos.y;
 
-
+while (1)
+{
 //cout << "left clik " << x << "," << y << endl;
 mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
 Sleep(100);
 mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
 Sleep(t);
-
-
+GetCursorPos(&CurPos);
+int xn = (int)CurPos.x;
+int yn = (int)CurPos.y;
+if (xn != x || yn != y) {
+  exit(0);
+    }
+}
 
 cout << "Again? or quit(y/n) ";
 cin >> Answer;
